@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "puppeteer": "^1.8.0"
   },
   "devDependencies": {},
