@@ -1,17 +1,17 @@
 require('dotenv').config()
 var chromeBrowserPath =""
-const exec = require("child_process").exec
-exec("uname -a | grep 'armv'", (error, stdout, stderr) => {
- //do whatever here
-        if( stdout != "") {
-                chromeBrowserPath = process.env.RASPI_CHROME_BROWSER_PATH;
-        } else {                 
-                chromeBrowserPath = process.env.X86_CHROME_BROWSER_PATH; 
 
-        }
-})
+const execSync = require('child_process').execSync;
+const uname = execSync('uname -a');
+const armCheck = uname.indexOf("arm");
 
- 
+if( armCheck > -1 ) {
+        chromeBrowserPath = process.env.RASPI_CHROME_BROWSER_PATH       
+} else {
+        chromeBrowserPath = process.env.X86_CHROME_BROWSER_PATH; 
+}
+
+console.log(armCheck, chromeBrowserPath)
 
 const puppeteer = require('puppeteer');
 (async () => {
