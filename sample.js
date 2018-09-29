@@ -4,9 +4,9 @@ const exec = require("child_process").exec
 exec("uname -a | grep 'armv'", (error, stdout, stderr) => {
  //do whatever here
         if( stdout != "") {
-                chromeBrowserPath = process.env.X86_CHROME_BROWSER_PATH;
+                chromeBrowserPath = process.env.RASPI_CHROME_BROWSER_PATH;
         } else {                 
-                chromeBrowserPath = process.env.RASPI_CHROME_BROWSER_PATH; 
+                chromeBrowserPath = process.env.X86_CHROME_BROWSER_PATH; 
 
         }
 })
