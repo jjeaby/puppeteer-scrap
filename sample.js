@@ -20,7 +20,7 @@ const puppeteer = require('puppeteer');
 (async () => {
     const browser = await puppeteer.launch({
         executablePath: chromeBrowserPath,
-        headless: false
+        //headless: false
     });
 
     const page = await browser.newPage();
