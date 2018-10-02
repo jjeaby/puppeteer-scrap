@@ -2,4 +2,7 @@ node_modules
 *.png
 */ttaDict
 */trace.json
+.idea
+.code
+
 
