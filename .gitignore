@@ -4,5 +4,6 @@ node_modules
 */trace.json
 .idea
 .code
+output/*
 
 
