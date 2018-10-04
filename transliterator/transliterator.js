@@ -35,7 +35,7 @@ if (armCheck > -1) {
 function sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds){
+        if ((new Date().getTime() - start) > milliseconds) {
             break;
         }
     }
@@ -57,28 +57,29 @@ function sleep(milliseconds) {
     await page.waitForSelector('#user-input');
 
 
-
     fs.writeFileSync('output.txt')
 
     for (i in ReadArray) {
 
-        await page.focus('#user-input');
-        await page.keyboard.type(ReadArray[i]);
+        if (ReadArray[i].length > 1) {
+            await page.focus('#user-input');
+            await page.keyboard.type(ReadArray[i]);
+            await page.click('html body div.container.col-md-6.col-md-offset-3 div.row form#form.col-sm-6 div.form-group input.btn.btn-primary.btn-block');
 
-        await page.click('html body div.container.col-md-6.col-md-offset-3 div.row form#form.col-sm-6 div.form-group input.btn.btn-primary.btn-block');
-        await page.waitForFunction('document.querySelector("#user-input").textContent.length == 0');
-        const text = await page.evaluate(() => document.querySelector('#output').textContent);
+            await page.waitForFunction('document.querySelector("#user-input").textContent.length == 0');
+            const text = await page.evaluate(() => document.querySelector('#output').textContent);
+            const flag = await page.evaluate(() => document.querySelector('#input > small'));
 
-        const flag = await page.evaluate(() => document.querySelector('#input > small'));
+            console.log(i + " " + ReadArray[i] + " " + flag)
 
-        if( flag === null && text.length > 1 ) {
-            writeStream.write(text + "\n");
+            if (flag === null && text.length > 1) {
+                writeStream.write(text + "\n");
+            }
+            sleep(4000);
         }
-        sleep(4000);
 
     }
     writeStream.end();
-    ReadArray.end();
 
     await browser.close();
 })();
