@@ -84,7 +84,7 @@ async function xpath(page, xpath) {
     } catch (e) {
         console.log(e.message)
     }
-    await util.sleep(3000);
+    await util.sleep(5000);
     await page.screenshot({path: screenShotName + '-end.png'});
 
     await browser.close();
