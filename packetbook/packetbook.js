@@ -78,9 +78,13 @@ async function xpath(page, xpath) {
     await page.waitForSelector(btn_claim);
     await page.click(btn_claim);
 
-    let tb_order_list = util.xPathToCss('//*[@id="product-account-list"]/div[1]/div[1]/div[3]');
-    await page.waitForSelector(tb_order_list);
-
+    try{
+        let tb_order_list = util.xPathToCss('//div[@class=\'product-line unseen\'][1]/div[@class=\'product-top-line\']');
+        await page.waitForSelector(tb_order_list);
+    } catch (e) {
+        console.log(e.message)
+    }
+    await util.sleep(3000);
     await page.screenshot({path: screenShotName + '-end.png'});
 
     await browser.close();
