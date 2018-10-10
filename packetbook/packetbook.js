@@ -77,6 +77,7 @@ async function xpath(page, xpath) {
     let btn_claim = util.xPathToCss('//input[@id=\'free-learning-claim\']');
     await page.waitForSelector(btn_claim);
     await page.click(btn_claim);
+    await page.screenshot({path: screenShotName + '-end.png'});
 
     await browser.close();
 })();
