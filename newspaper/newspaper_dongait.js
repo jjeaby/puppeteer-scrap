@@ -41,7 +41,7 @@ if (armCheck > -1) {
     await page.goto(dongaItIURL);
 
     // create file empty
-    util.writeFile('output.txt', articletText);
+    util.writeFile('output.txt', "");
 
     try {
         //page.on('console', util.logRequest);
