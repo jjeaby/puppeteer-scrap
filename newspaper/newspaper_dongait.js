@@ -40,7 +40,7 @@ if (armCheck > -1) {
         await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
         await page.goto(dongaItIURL);
 
-        util.writeFile('output_dongait.txt', '', 'w');
+        // util.writeFile('output_dongait.txt', '', 'w');
 
         //page.on('console', util.logRequest);
         await util.wait(page, '//header[@class=\'contents\']/nav[@class=\'skin\']/button[@class=\'btn\']');
@@ -51,15 +51,15 @@ if (armCheck > -1) {
 
                 let date = await util.getText(page, '//li[@class=\'li1\']/a/span[@class=\'intro\']/time');
 
-                // if (date.toString().split(" ")[0] !== '어제') {
-                //     break;
-                // }
+                if (date.toString().split(" ")[0] !== '어제') {
+                    break;
+                }
 
                 for (let index = 1; index <= 10; index++) {
                     let date = await util.getText(page, '//li[@class=\'li' + index + '\']/a/span[@class=\'intro\']/time');
-                    // if (date.toString().split(" ")[0] !== '어제') {
-                    //     break;
-                    // }
+                    if (date.toString().split(" ")[0] !== '어제') {
+                        break;
+                    }
 
                     await util.click(page, '//li[@class=\'li' + index + '\']/a');
                     await util.wait(page, '//div[@class=\'base\']');
