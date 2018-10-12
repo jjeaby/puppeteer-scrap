@@ -66,7 +66,7 @@ if (armCheck > -1) {
 
                     let articletText = await util.getText(page, '//*[@id="contents"]/article/p');
                     util.writeFile('output_dongait.txt', articletText, 'a');
-
+                    console.log(date + ' ' + articletText)
                     await page.goBack();
                 }
                 await util.click(page, '//li[@class=\'next\']/a')
