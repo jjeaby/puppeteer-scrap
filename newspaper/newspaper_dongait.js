@@ -26,61 +26,58 @@ if (armCheck > -1) {
 
 
 (async () => {
-    const browser = await puppeteer.launch({
-        executablePath: chromeBrowserPath,
-        headless: headlessFlag,
-        args: ["--disable-notifications"],
-        timeout: 100000,
-    });
+        const browser = await puppeteer.launch({
+            executablePath: chromeBrowserPath,
+            headless: headlessFlag,
+            args: ["--disable-notifications"],
+            timeout: 100000,
+        });
 
-    const page = await browser.newPage();
-    if (VIEWPORT) {
-        await page.setViewport(VIEWPORT);
-    }
-    await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
-    await page.goto(dongaItIURL);
+        const page = await browser.newPage();
+        if (VIEWPORT) {
+            await page.setViewport(VIEWPORT);
+        }
+        await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
+        await page.goto(dongaItIURL);
 
-    // create file empty
-    util.writeFile('output.txt', "");
+        util.writeFile('output_dongait.txt', '', 'w');
 
-    try {
         //page.on('console', util.logRequest);
         await util.wait(page, '//header[@class=\'contents\']/nav[@class=\'skin\']/button[@class=\'btn\']');
         await page.screenshot({path: screenShotName + '-start.png'});
+        try {
+            // for (let pageNum = 1; pageNum <= 1684; pageNum++) {
+            for (let pageNum = 1; pageNum <= 1684; pageNum++) {
 
-        // for (let pageNum = 1; pageNum <= 1684; pageNum++) {
-        for (let pageNum = 1; pageNum <= 1684; pageNum++) {
+                let date = await util.getText(page, '//li[@class=\'li1\']/a/span[@class=\'intro\']/time');
 
-            let date = await util.getText(page, '//li[@class=\'li1\']/a/span[@class=\'intro\']/time');
-
-            // if (date.toString().split(" ")[0] !== '어제') {
-            //     break;
-            // }
-
-            for (let index = 1; index <= 10; index++) {
-                let date = await util.getText(page, '//li[@class=\'li' + index + '\']/a/span[@class=\'intro\']/time');
                 // if (date.toString().split(" ")[0] !== '어제') {
                 //     break;
                 // }
 
-                await util.click(page, '//li[@class=\'li' + index + '\']/a');
-                await util.wait(page, '//div[@class=\'base\']');
+                for (let index = 1; index <= 10; index++) {
+                    let date = await util.getText(page, '//li[@class=\'li' + index + '\']/a/span[@class=\'intro\']/time');
+                    // if (date.toString().split(" ")[0] !== '어제') {
+                    //     break;
+                    // }
 
-                let articletText = await util.getText(page, '//*[@id="contents"]/article/p');
-                util.writeFile('output_dongait.txt', articletText, 'a');
-                consloe.log(articletText);
-                await page.goBack();
+                    await util.click(page, '//li[@class=\'li' + index + '\']/a');
+                    await util.wait(page, '//div[@class=\'base\']');
+
+                    let articletText = await util.getText(page, '//*[@id="contents"]/article/p');
+                    util.writeFile('output_dongait.txt', articletText, 'a');
+
+                    await page.goBack();
+                }
+                await util.click(page, '//li[@class=\'next\']/a')
             }
-            await util.click(page, '//li[@class=\'next\']/a')
+
+            await util.sleep(5000);
+            await page.screenshot({path: screenShotName + '-end.png'});
+            await browser.close();
+        } catch (e) {
+            await page.screenshot({path: screenShotName + '-end.png'});
+            await browser.close();
         }
-
-        await util.sleep(5000);
-
-    } catch (e) {
-        await page.screenshot({path: screenShotName + '-end.png'});
-        await browser.close();
-    } finally {
-        await page.screenshot({path: screenShotName + '-end.png'});
-        await browser.close();
     }
-})();
+)();
