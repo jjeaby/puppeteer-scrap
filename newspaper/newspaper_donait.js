@@ -68,6 +68,7 @@ if (armCheck > -1) {
 
                 let articletText = await util.getText(page, '//*[@id="contents"]/article/p');
                 util.writeFile('output.txt', articletText, 'a');
+                consloe.log(articletText);
                 await page.goBack();
             }
             await util.click(page, '//li[@class=\'next\']/a')
