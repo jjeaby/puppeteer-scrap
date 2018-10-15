@@ -46,6 +46,7 @@ const getText = async function (page, xpath) {
 const writeFile =  function (filename, text, mode) {
     let wstream = fs.createWriteStream(filename, { encoding: 'utf-8' , 'flags': mode });
     wstream.write(text + '\n');
+    console.log(text);
     wstream.end();
 
 
