@@ -7,4 +7,3 @@ node_modules
 output/*
 .idea
 .code
-packetbook/.env
