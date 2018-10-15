@@ -65,7 +65,7 @@ if (armCheck > -1) {
                     await util.wait(page, '//div[@class=\'base\']');
 
                     let articletText = await util.getText(page, '//*[@id="contents"]/article/p');
-                    util.writeFile('output_dongait.txt', articletText, 'a');
+                    util.writeFile('dongait_output.txt', articletText, 'a');
                     console.log(date + ' ' + articletText)
                     await page.goBack();
                 }
