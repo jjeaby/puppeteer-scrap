@@ -57,25 +57,23 @@ if (armCheck > -1) {
 
                 for (let index = 1; index <= 15; index++) {
 
-                    if( index >= 5 && index <= 9  ) {
-                        continue
+                    if (index < 5 || index > 9) {
+
+                        console.log(pageNum + "-" + index);
+
+                        // let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
+                        // if (date.toString().split(" ")[0] !== util.getDate()) {
+                        //     break;
+                        // }
+                        // await util.click(page, '//ul[@class=\'list_news\']/li[' + index + ']/dl//a');
+                        await page.click('ul.list_news > li:nth-of-type(' + index + ') > dl a')
+                        await util.wait(page, '//article/section[@id=\'articleBody\']/p');
+
+                        let articletText = await util.getText(page, '//article/section[@id=\'articleBody\']/p');
+                        util.writeFile('etnews_output.txt', articletText, 'a');
+                        //console.log(date + ' ' + articletText)
+                        await page.goBack();
                     }
-                    console.log(pageNum + "-" + index);
-
-                    // let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
-                    // if (date.toString().split(" ")[0] !== util.getDate()) {
-                    //     break;
-                    // }
-
-                    await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']');
-
-                    await util.click(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//a');
-                    await util.wait(page, '//article/section[@id=\'articleBody\']/p');
-
-                    let articletText = await util.getText(page, '//article/section[@id=\'articleBody\']/p');
-                    util.writeFile('etnews_output.txt', articletText, 'a');
-                    //console.log(date + ' ' + articletText)
-                    await page.goBack();
                 }
                 //await util.click(page, '//li[@class=\'next\']/a')
 
