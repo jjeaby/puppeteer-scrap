@@ -55,9 +55,9 @@ if (armCheck > -1) {
                 //     break;
                 // }
 
-                for (let index = 1; index <= 10; index++) {
+                for (let index = 1; index <= 94; index++) {
 
-                    if( index >= 6 && index <= 9 ) {
+                    if( index >= 5 && index <= 9  ) {
                         continue
                     }
                     console.log(pageNum + "-" + index);
