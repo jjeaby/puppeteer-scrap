@@ -11,6 +11,17 @@ const sleep = async function (milliseconds) {
     }
 };
 
+const getDate = function () {
+    var date = new Date(),
+        year = date.getFullYear(),
+        month = (date.getMonth() + 1).toString(),
+        formatedMonth = (month.length === 1) ? ("0" + month) : month,
+        day = date.getDate().toString(),
+        formatedDay = (day.length === 1) ? ("0" + day) : day;
+    return year + "." + formatedMonth + "." + formatedDay;
+};
+
+
 // const xPathToCss = function (xpath) {
 //     return xpath
 //         .replace(/\[(\d+?)\]/g, function (s, m1) {
@@ -31,7 +42,7 @@ const click = async function (page, xpath) {
 const wait = async function (page, xpath) {
     const selector = xPathToCss(xpath);
     //console.log(selector);
-    await page.waitForSelector(selector, {timeout: 200000});
+    await page.waitForSelector(selector, {timeout: 100000});
     return selector;
 };
 
@@ -43,10 +54,10 @@ const getText = async function (page, xpath) {
 
 };
 
-const writeFile =  function (filename, text, mode) {
-    let wstream = fs.createWriteStream(filename, { encoding: 'utf-8' , 'flags': mode });
+const writeFile = function (filename, text, mode) {
+    let wstream = fs.createWriteStream(filename, {encoding: 'utf-8', 'flags': mode});
     wstream.write(text + '\n');
-    console.log(text);
+    //console.log(text);
     wstream.end();
 
 
@@ -92,6 +103,7 @@ module.exports = {
     wait,
     getText,
     writeFile,
+    getDate,
     getElementByXpath,
     logRequest
 
