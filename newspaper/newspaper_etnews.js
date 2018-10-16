@@ -50,10 +50,10 @@ if (armCheck > -1) {
             for (let pageNum = 1; pageNum <= 5; pageNum++) {
                 await page.goto('http://www.etnews.com/news/section.html?id1=03&page=' + pageNum)
 
-                let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
-                if (date.toString().split(" ")[0] !== util.getDate()) {
-                    break;
-                }
+                // let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
+                // if (date.toString().split(" ")[0] !== util.getDate()) {
+                //     break;
+                // }
 
                 for (let index = 1; index <= 10; index++) {
 
@@ -62,10 +62,10 @@ if (armCheck > -1) {
                     }
                     console.log(pageNum + "-" + index);
 
-                    let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
-                    if (date.toString().split(" ")[0] !== util.getDate()) {
-                        break;
-                    }
+                    // let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
+                    // if (date.toString().split(" ")[0] !== util.getDate()) {
+                    //     break;
+                    // }
 
                     await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']');
 
