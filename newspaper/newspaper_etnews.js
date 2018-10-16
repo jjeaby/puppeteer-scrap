@@ -47,7 +47,7 @@ if (armCheck > -1) {
         await page.screenshot({path: screenShotName + '-start.png'});
         try {
             // for (let pageNum = 1; pageNum <= 1684; pageNum++) {
-            for (let pageNum = 1; pageNum <= 5; pageNum++) {
+            for (let pageNum = 1; pageNum <= 94; pageNum++) {
                 await page.goto('http://www.etnews.com/news/section.html?id1=03&page=' + pageNum)
 
                 // let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
@@ -55,7 +55,7 @@ if (armCheck > -1) {
                 //     break;
                 // }
 
-                for (let index = 1; index <= 94; index++) {
+                for (let index = 1; index <= 15; index++) {
 
                     if( index >= 5 && index <= 9  ) {
                         continue
