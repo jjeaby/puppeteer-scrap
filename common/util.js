@@ -12,13 +12,29 @@ const sleep = async function (milliseconds) {
 };
 
 const getDate = function () {
-    var date = new Date(),
+
+    let date = new Date,
         year = date.getFullYear(),
         month = (date.getMonth() + 1).toString(),
         formatedMonth = (month.length === 1) ? ("0" + month) : month,
         day = date.getDate().toString(),
         formatedDay = (day.length === 1) ? ("0" + day) : day;
     return year + "." + formatedMonth + "." + formatedDay;
+
+};
+
+const getYesterdayDate = function () {
+    let date = new Date();
+    date.setDate(date.getDate() - 1);
+
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString();
+    let formatedMonth = (month.length === 1) ? ("0" + month) : month;
+    let day = date.getDate().toString();
+    let formatedDay = (day.length === 1) ? ("0" + day) : day;
+
+    return year + "." + formatedMonth + "." + formatedDay;
+
 };
 
 
@@ -41,7 +57,7 @@ const click = async function (page, xpath) {
 
 const wait = async function (page, xpath) {
     const selector = xPathToCss(xpath);
-    //console.log(selector);
+    console.log(selector);
     await page.waitForSelector(selector, {timeout: 100000});
     return selector;
 };
@@ -104,6 +120,7 @@ module.exports = {
     getText,
     writeFile,
     getDate,
+    getYesterdayDate,
     getElementByXpath,
     logRequest
 
