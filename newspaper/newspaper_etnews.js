@@ -51,7 +51,7 @@ if (armCheck > -1) {
                 await page.goto('http://www.etnews.com/news/section.html?id1=03&page=' + pageNum)
 
                 let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
-                if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
+                if (date.toString().split(" ")[0] === util.getYesterdayDate()) {
                     break;
                 }
 
@@ -62,7 +62,7 @@ if (armCheck > -1) {
                         console.log(pageNum + "-" + index);
 
                         let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
-                        if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
+                        if (date.toString().split(" ")[0] === util.getYesterdayDate()) {
                             break;
                         }
                         // await util.click(page, '//ul[@class=\'list_news\']/li[' + index + ']/dl//a');
