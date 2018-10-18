@@ -30,7 +30,7 @@ else {
 
 (async () => {
 
-        etnewsUrlList = [ process.env.ETNEWS_02_URL, process.env.ETNEWS_03_URL ];
+        etnewsUrlList = [ process.env.ETNEWS_02_URL, process.env.ETNEWS_03_URL, process.env.ETNEWS_20_URL ];
 
         // etnewsUrlList.forEach( async function(URL) {
         for( let i=0; i<etnewsUrlList.length; i++) {
@@ -66,10 +66,8 @@ else {
 
                     let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
                     if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
-                        console.log(URL.indexOf('?id1=02'));
-                        if( URL.indexOf('?id1=02') <= 0 ) {
-                            break;
-                        }
+                        // console.log(URL.indexOf('?id1=02'));
+                        if( URL.indexOf('?id1=20') <= 0 ) break;
                     }
 
                     for (let index = 1; index <= 15; index++) {
@@ -80,10 +78,9 @@ else {
 
                             let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
                             if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
-                                console.log(URL.indexOf('?id1=02'));
-                                if( URL.indexOf('?id1=02') <= 0 ) {
-                                    break;
-                                }
+                                // console.log(URL.indexOf('?id1=02'));
+                                if( URL.indexOf('?id1=20') <= 0 ) break;
+
                             }
                             // await util.click(page, '//ul[@class=\'list_news\']/li[' + index + ']/dl//a');
                             await page.click('ul.list_news > li:nth-of-type(' + index + ') > dl a')
