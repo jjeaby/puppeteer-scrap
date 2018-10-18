@@ -29,24 +29,26 @@ else {
 
 
 (async () => {
-        const browser = await puppeteer.launch({
-            executablePath: chromeBrowserPath,
-            headless: headlessFlag,
-            args: ["--disable-notifications"],
-            timeout: 200000,
-        });
-
-        const page = await browser.newPage();
-        if (VIEWPORT) {
-            await page.setViewport(VIEWPORT);
-        }
-        await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
 
         etnewsUrlList = [ process.env.ETNEWS_02_URL, process.env.ETNEWS_03_URL ];
 
-        etnewsUrlList.forEach( async function(URL) {
+        // etnewsUrlList.forEach( async function(URL) {
+        for( let i=0; i<etnewsUrlList.length; i++) {
+            const browser = await puppeteer.launch({
+                executablePath: chromeBrowserPath,
+                headless: headlessFlag,
+                args: ["--disable-notifications"],
+                timeout: 200000,
+            });
+
+            const page = await browser.newPage();
+            if (VIEWPORT) {
+                await page.setViewport(VIEWPORT);
+            }
+            await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
 
 
+            let URL = etnewsUrlList[i];
             let screenShotName = URL.replace("https://", "").replace("http://", "").replace(/\//g, ".",);
             console.log(screenShotName);
 
@@ -59,9 +61,9 @@ else {
             await page.screenshot({path: screenShotName + '-start.png'});
             try {
                 // for (let pageNum = 1; pageNum <= 1684; pageNum++) {
-                for (let pageNum = 1; pageNum <= 94; pageNum++) {
+                for (let pageNum = 1; pageNum <= 2; pageNum++) {
                     await page.goto('http://www.etnews.com/news/section.html?id1=03&page=' + pageNum)
-                    await page.goto(etnewsUrl + '&page=' + pageNum);
+                    await page.goto(URL + '&page=' + pageNum);
 
                     let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
                     if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
@@ -101,7 +103,7 @@ else {
                 await page.screenshot({path: screenShotName + '-end.png'});
                 await browser.close();
             }
-        })
+        }
 
 
     }
