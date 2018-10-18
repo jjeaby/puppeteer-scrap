@@ -10,8 +10,8 @@ const armCheck = uname.indexOf("arm");
 let chromeBrowserPath;
 let headlessFlag = false;
 
-const dongaItIURL = process.env.ETNEWS_URL;
-let screenShotName = dongaItIURL.replace("https://", "").replace("http://", "").replace(/\//g, ".",);
+const etnewsUrl = process.env.ETNEWS_URL;
+let screenShotName = etnewsUrl.replace("https://", "").replace("http://", "").replace(/\//g, ".",);
 console.log(screenShotName);
 
 const VIEWPORT = {width: 1280, height: 1024, deviceScaleFactor: 2};
@@ -38,7 +38,7 @@ if (armCheck > -1) {
             await page.setViewport(VIEWPORT);
         }
         await page.tracing.start({path: 'trace.json', categories: ['devtools.timeline']})
-        await page.goto(dongaItIURL);
+        await page.goto(etnewsUrl);
 
         // util.writeFile('output_dongait.txt', '', 'w');
 
