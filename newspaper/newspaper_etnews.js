@@ -61,13 +61,15 @@ else {
             await page.screenshot({path: screenShotName + '-start.png'});
             try {
                 // for (let pageNum = 1; pageNum <= 1684; pageNum++) {
-                for (let pageNum = 1; pageNum <= 2; pageNum++) {
-                    await page.goto('http://www.etnews.com/news/section.html?id1=03&page=' + pageNum)
+                for (let pageNum = 1; pageNum <= 195; pageNum++) {
                     await page.goto(URL + '&page=' + pageNum);
 
                     let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[1]//dd[@class=\'date\']/span[2]');
                     if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
-                        break;
+                        console.log(URL.indexOf('?id1=02'));
+                        if( URL.indexOf('?id1=02') <= 0 ) {
+                            break;
+                        }
                     }
 
                     for (let index = 1; index <= 15; index++) {
@@ -78,7 +80,10 @@ else {
 
                             let date = await util.getText(page, '//div[@class=\'list_wrap\']/ul[@class=\'list_news\']/li[' + index + ']//dd[@class=\'date\']/span[2]');
                             if (date.toString().split(" ")[0] !== util.getYesterdayDate()) {
-                                break;
+                                console.log(URL.indexOf('?id1=02'));
+                                if( URL.indexOf('?id1=02') <= 0 ) {
+                                    break;
+                                }
                             }
                             // await util.click(page, '//ul[@class=\'list_news\']/li[' + index + ']/dl//a');
                             await page.click('ul.list_news > li:nth-of-type(' + index + ') > dl a')
