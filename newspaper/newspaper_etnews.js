@@ -5,22 +5,27 @@ const fs = require('fs');
 
 const execSync = require('child_process').execSync;
 const uname = execSync('uname -a');
-const armCheck = uname.indexOf("arm");
+
 
 let chromeBrowserPath;
 let headlessFlag = false;
 
-const etnewsUrl = process.env.ETNEWS_URL;
+const etnewsUrl = process.env.ETNEWS_03_URL;
 let screenShotName = etnewsUrl.replace("https://", "").replace("http://", "").replace(/\//g, ".",);
 console.log(screenShotName);
 
 const VIEWPORT = {width: 1280, height: 1024, deviceScaleFactor: 2};
 
-if (armCheck > -1) {
+if (uname.indexOf("arm") > -1) {
     chromeBrowserPath = process.env.RASPI_CHROME_BROWSER_PATH;
     headlessFlag = true;
-} else {
-    chromeBrowserPath = process.env.X86_CHROME_BROWSER_PATH;
+}
+else if (uname.indexOf("Darwin") > -1) {
+    chromeBrowserPath = process.env.DARWIN_CHROME_BROWSER_PATH;
+    headlessFlag = false;
+}
+else {
+    chromeBrowserPath = process.env.LINUX_CHROME_BROWSER_PATH;
     headlessFlag = false;
 }
 
