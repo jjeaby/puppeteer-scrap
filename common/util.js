@@ -37,6 +37,11 @@ const getYesterdayDate = function () {
 
 };
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+};
+
+
 
 // const xPathToCss = function (xpath) {
 //     return xpath
@@ -119,6 +124,7 @@ module.exports = {
     wait,
     getText,
     writeFile,
+    getRandomInt,
     getDate,
     getYesterdayDate,
     getElementByXpath,
