@@ -96,6 +96,7 @@ else {
                         } catch (e) {
                             continue;
                         }
+                        await util.sleep(1000);
                         await util.wait(page, '//*[@id="div_content"]/div[4]/div[2]/article/div');
 
                         let articletText = await util.getText(page, '//*[@id="div_content"]/div[4]/div[2]/article/div');
