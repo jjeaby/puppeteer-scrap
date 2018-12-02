@@ -68,11 +68,11 @@ else {
                     date = date.split(' ');
                     console.log(date[0] + ' ' + util.getYesterdayDate().replace(/\./g,'-'));
                     if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
-                        // break;
+                        break;
                     }
-                    if (date[0] === '2017-12-31') {
-                         break;
-                    }
+                    // if (date[0] === '2017-12-31') {
+                    //      break;
+                    // }
 
 
                     for (let index = 1; index <= 30; index++) {
@@ -82,11 +82,11 @@ else {
                         date = date.split(' ');
                         console.log(date[0] + ' ' + util.getYesterdayDate().replace(/\./g,'-'));
                         if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
-                            // break;
-                        }
-                        if (date[0] === '2017-12-31') {
                             break;
                         }
+                        // if (date[0] === '2017-12-31') {
+                        //     break;
+                        // }
 
 
 
