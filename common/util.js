@@ -1,6 +1,8 @@
 'use strict';
 const xPathToCss = require('xpath-to-css');
 const fs = require('fs');
+const os = require("os");
+
 
 const sleep = async function (milliseconds) {
     let start = new Date().getTime();
@@ -42,7 +44,6 @@ function getRandomInt(max) {
 };
 
 
-
 // const xPathToCss = function (xpath) {
 //     return xpath
 //         .replace(/\[(\d+?)\]/g, function (s, m1) {
@@ -76,12 +77,33 @@ const getText = async function (page, xpath) {
 };
 
 const writeFile = function (filename, text, mode) {
-    let wstream = fs.createWriteStream(filename, {encoding: 'utf-8', 'flags': mode});
-    wstream.write(text + '\n');
-    //console.log(text);
-    wstream.end();
+    // let wstream = fs.createWriteStream(filename, {encoding: 'utf-8', 'flags': mode});
+    // wstream.write(text + '\n');
+    // //console.log(text);
+    // wstream.end();
+
+    if (mode.toLowerCase() === 'a') {
+        fs.appendFileSync(filename, text + os.EOL);
+    } else {
+        fs.writeFileSync(filename, text + os.EOL);
+    }
 
 
+};
+
+const removeUnnecessaryChar = function (text) {
+    let retText = '';
+
+    text = text.trim();
+
+    let textArray = text.toString().split('\n');
+
+    for(let i =0; i < textArray.length; i++) {
+        textArray[i] = textArray[i].trim();
+        textArray[i] = textArray[i].replace(/[\s]+/g, ' ');
+    }
+
+    return textArray;
 };
 
 // -------------------------------------------------------------
@@ -128,6 +150,7 @@ module.exports = {
     getDate,
     getYesterdayDate,
     getElementByXpath,
-    logRequest
+    logRequest,
+    removeUnnecessaryChar
 
 };
