@@ -37,7 +37,8 @@ else {
                 executablePath: chromeBrowserPath,
                 headless: headlessFlag,
                 args: ["--disable-notifications"],
-                timeout: 200000,
+                networkIdleTimeout: 5000,
+                timeout: 3000000
             });
 
             const page = await browser.newPage();
