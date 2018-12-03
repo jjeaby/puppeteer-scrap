@@ -36,7 +36,7 @@ else {
             const browser = await puppeteer.launch({
                 executablePath: chromeBrowserPath,
                 headless: headlessFlag,
-                args: ["--disable-notifications"],
+                args: ["--disable-notifications", "--disable-gpu", "--disable-glsl-translator", "--disable-translate-new-ux"],
                 networkIdleTimeout: 5000,
                 timeout: 3000000
             });
@@ -52,7 +52,7 @@ else {
             let screenShotName = URL.replace("https://", "").replace("http://", "").replace(/\//g, ".",);
             console.log(screenShotName);
 
-            await page.goto(URL, {waitUntil: 'load'});
+            await page.goto(URL);
 
             // util.writeFile('output_dongait.txt', '', 'w');
 
@@ -110,7 +110,7 @@ else {
                         });
                         //console.log(date + ' ' + articletText)
                         // await page.goBack();
-                        await util.wait(page, '//div[@class=\'board_head\']/div[@class=\'board_name\']/h2/a');
+                        await page.goto(URL + '&po=' + pageNum);
 
 
                     }
