@@ -68,12 +68,12 @@ else {
                     let date = await util.getText(page, '//*[@id="div_content"]/div[7]/div[5]/span/span');
                     date = date.split(' ');
                     console.log(date[0] + ' ' + util.getYesterdayDate().replace(/\./g,'-'));
-                    if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
-                        break;
-                    }
-                    // if (date[0] === '2017-12-31') {
-                    //      break;
+                    // if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
+                    //     break;
                     // }
+                    if (date[0] === '2017-12-31') {
+                         break;
+                    }
 
 
                     for (let index = 1; index <= 30; index++) {
@@ -82,12 +82,12 @@ else {
                         let date = await util.getText(page, '//*[@id="div_content"]/div[7]/div[5]/span/span');
                         date = date.split(' ');
                         console.log(date[0] + ' ' + util.getYesterdayDate().replace(/\./g,'-'));
-                        if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
-                            break;
-                        }
-                        // if (date[0] === '2017-12-31') {
+                        // if (date[0] !== util.getYesterdayDate().replace(/\./g,'-')) {
                         //     break;
                         // }
+                        if (date[0] === '2017-12-31') {
+                            break;
+                        }
 
 
 
