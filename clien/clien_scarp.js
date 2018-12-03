@@ -109,7 +109,8 @@ else {
                             }
                         });
                         //console.log(date + ' ' + articletText)
-                        await page.goBack();
+                        // await page.goBack();
+                        await util.wait(page, '//div[@class=\'board_head\']/div[@class=\'board_name\']/h2/a');
 
 
                     }
