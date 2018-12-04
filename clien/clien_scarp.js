@@ -111,7 +111,7 @@ else {
 
                 }
 
-                await util.sleep(5000);
+                // await util.sleep(5000);
                 // await page.screenshot({path: screenShotName + '-end.png'});
                 await browser.close();
 
