@@ -56,7 +56,7 @@ else {
 
                 await page.goto(URL);
                 await util.wait(page, '//div[@class=\'board_head\']/div[@class=\'board_name\']/h2/a');
-                await page.screenshot({path: screenShotName + '-start.png'});
+                // await page.screenshot({path: screenShotName + '-start.png'});
 
 
                 await page.goto(URL + '&po=' + pageNum);
@@ -112,13 +112,13 @@ else {
                 }
 
                 await util.sleep(5000);
-                await page.screenshot({path: screenShotName + '-end.png'});
+                // await page.screenshot({path: screenShotName + '-end.png'});
                 await browser.close();
 
             }
         } catch (e) {
             console.log(e);
-            await page.screenshot({path: screenShotName + '-end.png'});
+            // await page.screenshot({path: screenShotName + '-end.png'});
             await browser.close();
         }
 
